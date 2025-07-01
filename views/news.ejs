@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Get News Headlines</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>🗺️ Get News by Country</h1>
+
+    <form action="/getnews" method="POST">
+      <label for="country">Choose a country:</label><br><br>
+      
+      <select name="country" id="country" required>
+        <option value="in">India 🇮🇳</option>
+        <option value="us">United States 🇺🇸</option>
+        <option value="gb">United Kingdom 🇬🇧</option>
+        <option value="au">Australia 🇦🇺</option>
+        <option value="ca">Canada 🇨🇦</option>
+      </select>
+
+      <br><br>
+      <button type="submit">Get Top Headlines 📰</button>
+    </form>
+
+    <form action="/" method="GET" style="margin-top: 20px;">
+      <button type="submit" class="secondary">Back to Home</button>
+    </form>
+  </div>
+
+</body>
+</html>

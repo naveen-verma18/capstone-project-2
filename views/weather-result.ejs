@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather Results</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Weather in <%= city %> 🌤️</h1>
+
+    <% if (temperature !== "N/A") { %>
+      <p>🌡️ Temperature: <%= temperature %>°C</p>
+      <p>💨 Wind Speed: <%= windSpeed %> km/h</p>
+      <p>☔ Rain Chance: <%= rainChance %>%</p>
+    <% } else { %>
+      <p>❌ Could not find weather for "<%= city %>".</p>
+    <% } %>
+
+    <form action="/weather" method="GET" style="margin-top: 20px;">
+      <button type="submit">Check Another City</button>
+    </form>
+
+    <form action="/" method="GET" style="margin-top: 10px;">
+      <button type="submit" class="secondary">Back to Home</button>
+    </form>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Top News from <%= country.toUpperCase() %></title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>📰 Top News - <%= country.toUpperCase() %></h1>
+
+    <% if (articles.length > 0) { %>
+      <% articles.forEach(article => { %>
+        <div class="news-card" style="margin: 20px 0; border: 1px solid #ccc; padding: 15px; border-radius: 10px;">
+          <h2><%= article.title %></h2>
+
+          <% if (article.image) { %>
+            <img src="<%= article.image %>" alt="News Image" style="width: 100%; max-width: 500px; border-radius: 10px;">
+          <% } %>
+
+          <p><%= article.description %></p>
+
+          <a href="<%= article.url %>" target="_blank" style="color: blue;">Read Full Article 🔗</a>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>❌ No news articles found for this country.</p>
+    <% } %>
+
+    <form action="/news" method="GET" style="margin-top: 30px;">
+      <button type="submit">Get News for Another Country</button>
+    </form>
+
+    <form action="/" method="GET" style="margin-top: 10px;">
+      <button type="submit" class="secondary">Back to Home</button>
+    </form>
+
+  </div>
+
+</body>
+</html>

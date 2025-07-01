@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Capstone Project - Home</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Welcome to the Capstone Project! 😁</h1>
+
+    <p>This is a multi-API web app. Let's start by telling you a joke or checking the weather!</p>
+
+    <!-- Joke Button -->
+    <form action="/loading" method="GET">
+      <label for="category">Choose a joke category:</label><br><br>
+      <select name="category" id="category" required>
+        <option value="Any">Any</option>
+        <option value="Programming">Programming</option>
+        <option value="Misc">Misc</option>
+        <option value="Pun">Pun</option>
+        <option value="Dark">Dark</option>
+        <option value="Spooky">Spooky</option>
+      </select><br><br>
+
+      <button type="submit">Tell Me a Joke 😂</button>
+    </form>
+
+    <!-- Weather Button -->
+    <form action="/weather" method="GET">
+      <button type="submit" style="margin-top: 20px;">Check Weather 🌦️</button>
+    </form>
+
+    <!-- Cryto Button -->
+    <form action="/crypto" method="GET">
+      <button type="submit" style="margin-top: 20px;">Check Crypto Prices 🪙</button>
+    </form>
+    
+    <!-- Coctail Button -->
+    <form action="/cocktail" method="GET">
+      <button type="submit" style="margin-top: 20px;">Get a Random Cocktail 🍸</button>
+    </form>
+
+    <form action="/news" method="GET">
+      <button type="submit" style="margin-top: 20px;">📰 Get News Headlines</button>
+    </form>
+    
+  </div>
+
+  
+
+</body>
+</html>

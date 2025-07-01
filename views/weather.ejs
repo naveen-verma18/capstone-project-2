@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Check Weather</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Check the Weather 🌦️</h1>
+
+    <!-- Weather Form -->
+    <form action="/getweather" method="POST">
+      <label for="city">Enter City Name:</label><br><br>
+      <input type="text" id="city" name="city" required>
+      <br><br>
+      <button type="submit">Get Weather</button>
+    </form>
+
+    <!-- Back to home -->
+    <form action="/" method="GET" style="margin-top: 20px;">
+      <button type="submit" class="secondary">Back to Home</button>
+    </form>
+  </div>
+
+</body>
+</html>

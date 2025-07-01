@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crypto Price Checker</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Check Crypto Prices 🪙</h1>
+
+    <!-- Crypto Form -->
+    <form action="/getcrypto" method="POST">
+      <label for="crypto">Select a cryptocurrency:</label><br><br>
+
+      <select name="crypto" id="crypto" required>
+        <option value="bitcoin">Bitcoin</option>
+        <option value="ethereum">Ethereum</option>
+        <option value="dogecoin">Dogecoin</option>
+        <option value="solana">Solana</option>
+      </select>
+
+      <br><br>
+      <button type="submit">Check Price</button>
+    </form>
+
+    <form action="/" method="GET" style="margin-top: 20px;">
+      <button type="submit" class="secondary">Back to Home</button>
+    </form>
+  </div>
+
+</body>
+</html>

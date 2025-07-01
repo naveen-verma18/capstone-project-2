@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= name %> - Cocktail</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>🍸 <%= name %></h1>
+
+    <img src="<%= image %>" alt="<%= name %>" style="width: 300px; border-radius: 15px; margin: 20px 0;">
+
+    <h3>🧾 Ingredients:</h3>
+    <ul>
+      <% ingredients.forEach(item => { %>
+        <li><%= item %></li>
+      <% }) %>
+    </ul>
+
+    <h3>📖 Instructions:</h3>
+    <p><%= instructions %></p>
+
+    <form action="/cocktail" method="GET" style="margin-top: 20px;">
+      <button type="submit">Get Another Drink 🍹</button>
+    </form>
+
+    <form action="/" method="GET" style="margin-top: 10px;">
+      <button type="submit" class="secondary">Back to Home</button>
+    </form>
+
+  </div>
+
+</body>
+</html>

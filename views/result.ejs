@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Joke</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Here's your joke! 😅</h1>
+
+    <p><%- data %></p>
+
+    <!-- Button to get another joke of same category -->
+    <form action="/joke" method="GET" style="margin-bottom: 15px;">
+      <input type="hidden" name="category" value="Any"> <!-- optional, default fallback -->
+      <button type="submit">Get Another Joke</button>
+    </form>
+
+    <!-- ✅ NEW BUTTON to go back to home page -->
+    <form action="/" method="GET">
+      <button type="submit" class="secondary">Back to Home</button>
+    </form>
+  </div>
+
+</body>
+</html>

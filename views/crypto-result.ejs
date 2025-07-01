@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= coin %> Price</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1><%= coin %> Price 🪙</h1>
+
+    <% if (inrPrice !== "N/A") { %>
+      <p>🇮🇳 INR: ₹<%= inrPrice.toLocaleString() %></p>
+      <p>🇺🇸 USD: $<%= usdPrice.toLocaleString() %></p>
+    <% } else { %>
+      <p>❌ Could not fetch the price for "<%= coin %>"</p>
+    <% } %>
+
+    <!-- Back to crypto form -->
+    <form action="/crypto" method="GET" style="margin-top: 20px;">
+      <button type="submit">Check Another Coin</button>
+    </form>
+
+    <!-- Back to home -->
+    <form action="/" method="GET" style="margin-top: 10px;">
+      <button type="submit" class="secondary">Back to Home</button>
+    </form>
+  </div>
+
+</body>
+</html>
