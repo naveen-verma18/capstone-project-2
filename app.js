@@ -21,26 +21,17 @@ app.get("/", (req, res) => {
 // Joke route – fetches a random joke and renders it
 app.get("/joke", async (req, res) => {
   try {
-    // 🔍 Read the category from query string
-    const category = req.query.category || "Any";
-
-    // 🔗 Call JokeAPI with selected category
-    const response = await axios.get(`https://v2.jokeapi.dev/joke/${category}`);
-
-    const jokeData = response.data;
-    let jokeText;
-
-    if (jokeData.type === "single") {
-      jokeText = jokeData.joke;
+    const response = await axios.get("https://v2.jokeapi.dev/joke/Any");
+    let joke;
+    if (response.data.type === "twopart") {
+      joke = `${response.data.setup}\n${response.data.delivery}`;
     } else {
-      jokeText = `${jokeData.setup} <br><strong>${jokeData.delivery}</strong>`;
+      joke = response.data.joke;
     }
-
-    res.render("result", { data: jokeText });
-
-  } catch (error) {
-    console.error("Error fetching joke:", error.message);
-    res.render("result", { data: "Oops! Couldn't fetch a joke." });
+    res.render("result", { joke });
+  } catch (err) {
+    console.error("Error fetching joke:", err);
+    res.send("Failed to load joke.");
   }
 });
 
@@ -57,52 +48,39 @@ app.get("/weather", (req, res) => {
   res.render("weather");
 });
 
-app.post("/getweather", async (req, res) => {
+app.post("/weather", async (req, res) => {
+  const city = req.body.city;
+  const apiKey = "67ddc306600f7ec3d87f56e1aa1fc83b";
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
   try {
-    const city = req.body.city; // Get the city from the form input
+    const response = await axios.get(url);
+    const weatherData = response.data;
 
-    // 🔍 Step 1: Get latitude and longitude of the city
-    const geoURL = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`;
-    const geoResponse = await axios.get(geoURL);
-    const location = geoResponse.data.results?.[0];
-
-    if (!location) {
-      return res.render("weather-result", {
-        city,
-        temperature: "N/A",
-        windSpeed: "N/A",
-        rainChance: "N/A"
-      });
-    }
-
-    const lat = location.latitude;
-    const lon = location.longitude;
-
-    // 🌤️ Step 2: Get weather using those coordinates
-    const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=precipitation_probability`;
-    const weatherResponse = await axios.get(weatherURL);
+    const weather = {
+      city: weatherData.name,
+      country: weatherData.sys.country,
+      temperature: weatherData.main.temp,
+      feels_like: weatherData.main.feels_like,
+      temp_min: weatherData.main.temp_min,
+      temp_max: weatherData.main.temp_max,
+      humidity: weatherData.main.humidity,
+      wind: weatherData.wind.speed,
+      condition: weatherData.weather[0].main,
+      description: weatherData.weather[0].description,
+      icon: weatherData.weather[0].icon,
+    };
     
-    const currentWeather = weatherResponse.data.current_weather;
-    const rainChance = weatherResponse.data.hourly?.precipitation_probability?.[0] ?? "N/A";
-
-    // 🎯 Render weather result page with data
-    res.render("weather-result", {
-      city,
-      temperature: currentWeather.temperature,
-      windSpeed: currentWeather.windspeed,
-      rainChance
-    });
-
+    res.render("weather-result", weather);
+    
   } catch (error) {
-    console.error("Error fetching weather:", error.message);
-    res.render("weather-result", {
-      city: "Unknown",
-      temperature: "N/A",
-      windSpeed: "N/A",
-      rainChance: "N/A"
-    });
+    console.error("Weather API error:", error.response?.data || error.message);
+    res.render("error", { message: "Could not fetch weather. Please try again." });
   }
 });
+
+
+
 
 
 app.get("/crypto", (req, res) => {

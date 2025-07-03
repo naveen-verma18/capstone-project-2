@@ -1,31 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8">
-  <title>Weather Results</title>
-  <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8" />
+  <title>Weather in <%= city %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ["'Poppins'", "sans-serif"],
+            body: ["'Open Sans'", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+  </style>
 </head>
-<body>
 
-  <div class="container">
-    <h1>Weather in <%= city %> 🌤️</h1>
+<body class="min-h-screen bg-gradient-to-br from-sky-200 via-blue-300 to-purple-300 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 font-body text-gray-900 dark:text-white">
 
-    <% if (temperature !== "N/A") { %>
-      <p>🌡️ Temperature: <%= temperature %>°C</p>
-      <p>💨 Wind Speed: <%= windSpeed %> km/h</p>
-      <p>☔ Rain Chance: <%= rainChance %>%</p>
-    <% } else { %>
-      <p>❌ Could not find weather for "<%= city %>".</p>
-    <% } %>
+  <!-- Header -->
+  <header class="px-6 py-4 bg-white dark:bg-gray-800 shadow-md flex justify-between items-center">
+    <h1 class="text-2xl font-heading text-sky-600 dark:text-yellow-300">🌤 Weather Report</h1>
+    <a href="/" class="text-sm px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md transition">🏠 Home</a>
+  </header>
 
-    <form action="/weather" method="GET" style="margin-top: 20px;">
-      <button type="submit">Check Another City</button>
-    </form>
+  <!-- Weather Card -->
+  <main class="flex flex-col items-center justify-center px-4 py-16 text-center">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-10 w-full max-w-md fade-in">
 
-    <form action="/" method="GET" style="margin-top: 10px;">
-      <button type="submit" class="secondary">Back to Home</button>
-    </form>
-  </div>
+      <!-- Icon -->
+      <div class="flex justify-center mb-4">
+        <div class="w-24 h-24 rounded-full bg-white/10 border border-white/20 flex items-center justify-center shadow-md backdrop-blur-sm">
+          <img src="http://openweathermap.org/img/wn/<%= icon %>@2x.png" alt="Weather Icon" class="w-16 h-16" />
+        </div>
+      </div>
+
+      <!-- Main Info -->
+      <h2 class="text-xl font-semibold mb-1"><%= city %>, <%= country %></h2>
+      <p class="text-5xl font-bold text-sky-500 dark:text-yellow-300 mb-1"><%= temperature %>°C</p>
+      <p class="text-md font-medium mb-2 italic"><%= condition %> — <%= description %></p>
+
+      <!-- Extra Details -->
+      <div class="grid grid-cols-2 gap-4 text-sm mt-6 text-left px-4">
+        <p>🌡️ Feels like: <strong><%= feels_like %>°C</strong></p>
+        <p>📉 Min Temp: <strong><%= temp_min %>°C</strong></p>
+        <p>📈 Max Temp: <strong><%= temp_max %>°C</strong></p>
+        <p>💧 Humidity: <strong><%= humidity %>%</strong></p>
+        <p>🌬️ Wind: <strong><%= wind %> m/s</strong></p>
+      </div>
+
+      <!-- Buttons -->
+      <div class="space-x-4 mt-8">
+        <a href="/weather" class="px-5 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition">🔁 Search Again</a>
+        <a href="/" class="px-5 py-2 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-full transition">🏠 Back Home</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 text-sm text-gray-600 dark:text-gray-400">
+    ☁️ Powered by OpenWeatherMap | Crafted by <strong>Naveen Verma</strong>
+  </footer>
 
 </body>
 </html>

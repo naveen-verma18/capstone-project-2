@@ -1,43 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Top News from <%= country.toUpperCase() %></title>
-  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
-<body>
 
-  <div class="container">
+<body class="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white px-4 py-12">
 
-    <h1>📰 Top News - <%= country.toUpperCase() %></h1>
+  <div class="max-w-6xl mx-auto space-y-10">
 
+    <!-- Title -->
+    <h1 class="text-4xl font-bold text-center text-yellow-400">📰 Top Headlines - <%= country.toUpperCase() %></h1>
+
+    <!-- News Grid -->
     <% if (articles.length > 0) { %>
-      <% articles.forEach(article => { %>
-        <div class="news-card" style="margin: 20px 0; border: 1px solid #ccc; padding: 15px; border-radius: 10px;">
-          <h2><%= article.title %></h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <% articles.forEach(article => { %>
+          <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md hover:shadow-yellow-400/20 transition duration-300 fade-in-up">
 
-          <% if (article.image) { %>
-            <img src="<%= article.image %>" alt="News Image" style="width: 100%; max-width: 500px; border-radius: 10px;">
-          <% } %>
+            <!-- Image -->
+            <% if (article.image) { %>
+              <img src="<%= article.image %>" alt="News Image"
+                class="w-full h-48 object-cover rounded-md mb-4 transition-transform duration-300 hover:scale-105" />
+            <% } %>
 
-          <p><%= article.description %></p>
+            <!-- Source + Date -->
+            <div class="flex justify-between items-center text-sm text-gray-400 mb-2">
+              <span class="bg-gray-700 text-xs px-2 py-1 rounded-full font-semibold uppercase tracking-wide">
+                🏷️ <%= article.source || "Unknown Source" %>
+              </span>
+              <% if (article.publishedAt) { %>
+                <span>📅 <%= new Date(article.publishedAt).toLocaleDateString() %></span>
+              <% } %>
+            </div>
 
-          <a href="<%= article.url %>" target="_blank" style="color: blue;">Read Full Article 🔗</a>
-        </div>
-      <% }) %>
+            <!-- Title -->
+            <h2 class="text-xl font-semibold text-white mb-2"><%= article.title %></h2>
+
+            <!-- Description -->
+            <p class="text-gray-300 mb-4"><%= article.description %></p>
+
+            <!-- Link -->
+            <a href="<%= article.url %>" target="_blank"
+              class="inline-block text-yellow-400 hover:underline font-medium">
+              🔗 Read Full Article
+            </a>
+          </div>
+        <% }) %>
+      </div>
     <% } else { %>
-      <p>❌ No news articles found for this country.</p>
+      <p class="text-red-400 text-lg font-medium text-center mt-10">❌ No news articles found for this country.</p>
     <% } %>
 
-    <form action="/news" method="GET" style="margin-top: 30px;">
-      <button type="submit">Get News for Another Country</button>
-    </form>
+    <!-- Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 pt-10 justify-center">
+      <form action="/news" method="GET" class="w-full sm:w-auto">
+        <button
+          class="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-semibold py-2 px-5 rounded-md shadow-md transition hover:scale-105"
+        >
+          🌍 Choose Another Country
+        </button>
+      </form>
 
-    <form action="/" method="GET" style="margin-top: 10px;">
-      <button type="submit" class="secondary">Back to Home</button>
-    </form>
+      <form action="/" method="GET" class="w-full sm:w-auto">
+        <button
+          class="w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-5 rounded-md shadow-md transition hover:scale-105"
+        >
+          🏠 Back to Home
+        </button>
+      </form>
+    </div>
 
   </div>
+  <footer class="text-center py-4 text-sm text-gray-400 dark:text-gray-500">
+    📡 Curated with curiosity & crafted by <strong class="text-yellow-400">Naveen Verma</strong> — decoding headlines one byte at a time 🧠📰
+  </footer>
+  
 
 </body>
 </html>

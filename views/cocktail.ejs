@@ -1,35 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title><%= name %> - Cocktail</title>
-  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .fade-in {
+      animation: fadeInUp 0.8s ease-out both;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
-<body>
 
-  <div class="container">
+<body class="min-h-screen bg-gradient-to-br from-[#0f172a] to-[#1e293b] text-white flex items-center justify-center px-6 py-12">
 
-    <h1>🍸 <%= name %></h1>
+  <div class="bg-[#1e293b] border border-gray-700 shadow-2xl rounded-2xl p-8 max-w-2xl w-full space-y-8 fade-in">
+    
+    <!-- Title -->
+    <h1 class="text-4xl font-bold text-center text-yellow-400 tracking-wide">🍸 <%= name %></h1>
 
-    <img src="<%= image %>" alt="<%= name %>" style="width: 300px; border-radius: 15px; margin: 20px 0;">
+    <!-- Image with hover tip -->
+    <div class="flex justify-center relative group">
+      <img src="<%= image %>" alt="<%= name %>" class="rounded-xl w-72 h-auto border-4 border-yellow-500 shadow-md transition-transform duration-300 group-hover:scale-105" />
+      
+      <!-- Hover Tooltip -->
+      <div class="absolute bottom-0 mb-2 opacity-0 group-hover:opacity-100 transition bg-yellow-500 text-black text-sm font-medium py-1 px-3 rounded-md shadow-md">
+        Shake well before serving 🍋
+      </div>
+    </div>
 
-    <h3>🧾 Ingredients:</h3>
-    <ul>
-      <% ingredients.forEach(item => { %>
-        <li><%= item %></li>
-      <% }) %>
-    </ul>
+    <!-- Ingredients -->
+    <div>
+      <h2 class="text-2xl font-semibold text-yellow-300 mb-2">🧾 Ingredients</h2>
+      <ul class="list-disc list-inside text-gray-300 space-y-1">
+        <% ingredients.forEach(item => { %>
+          <li><%= item %></li>
+        <% }) %>
+      </ul>
+    </div>
 
-    <h3>📖 Instructions:</h3>
-    <p><%= instructions %></p>
+    <!-- Instructions -->
+    <div>
+      <h2 class="text-2xl font-semibold text-yellow-300 mb-2">📖 Instructions</h2>
+      <p class="text-gray-200 leading-relaxed"><%= instructions %></p>
+    </div>
 
-    <form action="/cocktail" method="GET" style="margin-top: 20px;">
-      <button type="submit">Get Another Drink 🍹</button>
-    </form>
-
-    <form action="/" method="GET" style="margin-top: 10px;">
-      <button type="submit" class="secondary">Back to Home</button>
-    </form>
+    <!-- Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+      <form action="/cocktail" method="GET" class="w-full">
+        <button class="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-semibold py-2 px-4 rounded-lg transition shadow-lg hover:scale-[1.02]">
+          🍹 Get Another Drink
+        </button>
+      </form>
+      <form action="/" method="GET" class="w-full">
+        <button class="w-full bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition shadow-lg hover:scale-[1.02]">
+          🏠 Back to Home
+        </button>
+      </form>
+    </div>
 
   </div>
 

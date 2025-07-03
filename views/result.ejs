@@ -1,28 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Your Joke</title>
-  <link rel="stylesheet" href="/style.css">
-</head>
-<body>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <title>😂 Your Joke!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              heading: ["'Poppins'", "sans-serif"],
+              body: ["'Open Sans'", "sans-serif"]
+            },
+            animation: {
+              float: 'float 3s ease-in-out infinite'
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' }
+              }
+            }
+          }
+        }
+      };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
+  </head>
 
-  <div class="container">
-    <h1>Here's your joke! 😅</h1>
+  <body class="min-h-screen bg-gradient-to-br from-yellow-100 via-pink-200 to-red-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 font-body text-gray-800 dark:text-white">
+    
+    <!-- Header -->
+    <header class="px-6 py-4 bg-white dark:bg-gray-800 shadow-md flex justify-between items-center">
+      <h1 class="text-2xl font-heading text-rose-500 dark:text-yellow-300 animate-pulse">😂 Joke Central</h1>
+      <a href="/" class="text-sm px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md transition">🏠 Back to Home</a>
+    </header>
 
-    <p><%- data %></p>
+    <!-- Joke Card -->
+    <main class="flex flex-col items-center justify-center px-4 py-20 text-center">
+      <div class="relative w-full max-w-2xl bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 animate-fadeIn transform hover:scale-105 transition duration-300 ease-in-out animate-float">
+        <div class="text-5xl mb-4">🤣</div>
+        <h2 class="text-2xl font-bold text-indigo-600 dark:text-yellow-400 mb-4">Your Joke of the Moment:</h2>
+        <p class="text-lg leading-relaxed" style="white-space: pre-line;"><%= joke %></p>
+        <div class="mt-8 space-x-4">
+          <a href="/joke" class="inline-block px-6 py-2 bg-pink-500 hover:bg-pink-600 text-white rounded-full transition">🎲 Get Another Joke</a>
+          <a href="/" class="inline-block px-6 py-2 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-full transition">🏠 Back Home</a>
+        </div>
+      </div>
+    </main>
 
-    <!-- Button to get another joke of same category -->
-    <form action="/joke" method="GET" style="margin-bottom: 15px;">
-      <input type="hidden" name="category" value="Any"> <!-- optional, default fallback -->
-      <button type="submit">Get Another Joke</button>
-    </form>
-
-    <!-- ✅ NEW BUTTON to go back to home page -->
-    <form action="/" method="GET">
-      <button type="submit" class="secondary">Back to Home</button>
-    </form>
-  </div>
-
-</body>
+    <!-- Footer -->
+    <footer class="mt-12 text-center text-sm text-gray-600 dark:text-gray-400">
+      😄 Made with humor by <strong>Naveen Verma</strong> — © 2025
+    </footer>
+  </body>
 </html>

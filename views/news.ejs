@@ -1,33 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Get News Headlines</title>
-  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out both;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .flag-hover:hover {
+      filter: drop-shadow(0 0 5px gold);
+    }
+  </style>
 </head>
-<body>
 
-  <div class="container">
-    <h1>🗺️ Get News by Country</h1>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white flex items-center justify-center px-4 py-12">
 
-    <form action="/getnews" method="POST">
-      <label for="country">Choose a country:</label><br><br>
-      
-      <select name="country" id="country" required>
-        <option value="in">India 🇮🇳</option>
-        <option value="us">United States 🇺🇸</option>
-        <option value="gb">United Kingdom 🇬🇧</option>
-        <option value="au">Australia 🇦🇺</option>
-        <option value="ca">Canada 🇨🇦</option>
+  <div class="bg-gray-800 bg-opacity-90 border border-gray-700 shadow-2xl rounded-2xl max-w-md w-full p-8 space-y-6 transition-all fade-in-up">
+
+    <!-- Animated Title -->
+    <h1 class="text-3xl font-bold text-center text-yellow-400 animate-bounce">
+      🗺️ Get News by Country
+    </h1>
+
+    <!-- Form -->
+    <form action="/getnews" method="POST" class="space-y-4">
+      <label for="country" class="block text-gray-200 font-medium text-lg">🌐 Choose a country:</label>
+
+      <select
+        name="country"
+        id="country"
+        required
+        class="w-full bg-gray-700 text-white py-2 px-4 rounded-lg shadow-inner border border-gray-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+      >
+        <option class="flag-hover" value="in">India 🇮🇳</option>
+        <option class="flag-hover" value="us">United States 🇺🇸</option>
+        <option class="flag-hover" value="gb">United Kingdom 🇬🇧</option>
+        <option class="flag-hover" value="au">Australia 🇦🇺</option>
+        <option class="flag-hover" value="ca">Canada 🇨🇦</option>
       </select>
 
-      <br><br>
-      <button type="submit">Get Top Headlines 📰</button>
+      <button
+        type="submit"
+        class="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-semibold py-2 px-4 rounded-md transition-transform hover:scale-105 shadow-lg flex items-center justify-center gap-2"
+      >
+        📰 Get Top Headlines
+      </button>
     </form>
 
-    <form action="/" method="GET" style="margin-top: 20px;">
-      <button type="submit" class="secondary">Back to Home</button>
+    <!-- Back to Home -->
+    <form action="/" method="GET">
+      <button
+        type="submit"
+        class="w-full mt-2 bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-md transition hover:scale-105 shadow-md"
+      >
+        🏠 Back to Home
+      </button>
     </form>
+
   </div>
 
 </body>
